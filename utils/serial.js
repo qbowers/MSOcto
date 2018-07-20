@@ -2,7 +2,7 @@ const serialports = require('serialport');
 
 
 const { exec } = require('child_process');
-exec('echo HELLO THEREEE', (error, stdout, stderr) => {
+exec('ls /dev/', (error, stdout, stderr) => {
   if (error) console.error(error);
 
   console.log('result: ' + stdout);
