@@ -1,0 +1,150 @@
+{% extends 'main.html' %}
+
+{% block style %}
+  <link rel='stylesheet' href='/style/setup.css' />
+{% endblock %}
+
+
+
+
+
+{% block body %}
+  {% if local %}
+    <div class='stage' id='title' style='display:block'>
+      <div class='container center'>
+        <h1>SETUP</h1>
+        <p>You have to set up some servers first. <button onclick='start()'>continue</button></p>
+      </div>
+    </div>
+
+
+    <div class='stage' id='prompt'>
+
+
+
+      {% for octoprint in OctoPrints %}
+        <div class='setup center' id='octoprint-{{ loop.index0 }}'>
+          <h1>Select which printer is wiggling</h1>
+          <button onclick='OctoPrints[{{ loop.index0 }}].wiggle()'>wiggle</button>
+          <div class='dropdown'>
+            <button id='button'>Select Printer</button>
+            <div class='content'></div>
+          </div>
+          <button onclick='OctoPrints[{{ loop.index0 }}].set()'>Set</button>
+        </div>
+      {% endfor %}
+    </div>
+
+
+  {% else %}
+
+
+    <div class='stage' id='remote'>
+      <h1>You are a remote user</h1>
+      <p>Please go to the design lab to set up the servers</p>
+    </div>
+  {% endif %}
+
+  <div class='stage' id='complete'>
+    <h1>Done!</h1>
+    <p>Printers are all set up! You may now use them. <a href='/'><button>continue</button></a></p>
+  </div>
+
+
+
+{% endblock %}
+
+{% block script %}
+  <script>
+    socket = io();
+
+
+    function start() {
+      view.set('prompt');
+      OctoPrints[0].start();
+    }
+    function error(e) {
+      window.alert(e);
+    }
+
+
+    view = {
+      current: $('#title'),
+      set: (stage) => {
+        view.current.hide();
+        view.current = $('#' + stage);
+        view.current.show();
+      }
+    }
+
+    function dropdownString(name, octoprint) {
+      return '<a onclick=\'OctoPrints[' + octoprint +'].select(this.innerHTML)\'>' + name + '</a>';
+    }
+
+
+
+    function OctoPrint(data) {
+      this.index = OctoPrints.length;
+      this.elem = $('#octoprint-' + this.index);
+      this.dropdown = {
+        selected: null,
+        button: this.elem.find('.dropdown').find('button:first'),
+        content: this.elem.find('.content')
+      };
+      this.getOptions = async function() { this.options = (await hc.get('/setup/options/' + this.index)).body; }
+      this.fill = () => {
+        this.dropdown.content.html('');
+        for (let i = 0; i < this.options.length; i++) {
+          if (this.options[i] != this.dropdown.selected)
+            this.dropdown.content.append( dropdownString(this.options[i], this.index) );
+        }
+      };
+      this.start = async function() {
+        await this.getOptions();
+        this.fill();
+        this.elem.show();
+        this.wiggle();
+      };
+      this.select = (name) => {
+        this.dropdown.selected = name;
+        this.dropdown.button.text(name);
+        this.fill();
+      };
+      this.set = () => {
+        if (this.dropdown.selected){
+
+          hc.post('/setup/set/', {
+            octoprint: this.index,
+            printer: this.dropdown.selected
+          }).then((res) => {
+            if (res.status == 204) this.next();
+            else if (res.status == 200) view.set('complete');
+            else error('there was an issue. try again');
+          });
+
+        } else error('Select a Printer first');
+      };
+      this.next = () => {
+        this.elem.hide();
+        if (this.index < OctoPrints.length - 1) OctoPrints[this.index + 1].start();
+        else view.set('complete');
+      };
+      this.wiggle = () => {
+        hc.post('/setup/wiggle', {octoprint: this.index});
+      }
+
+
+
+      OctoPrints.push(this);
+    }
+    OctoPrints=[];
+    {% for octoprint in OctoPrints %} new OctoPrint(); {% endfor %}
+
+
+
+
+
+
+    function close() {}
+  </script>
+{% endblock %}

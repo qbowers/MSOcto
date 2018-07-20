@@ -1,0 +1,104 @@
+OctoPrint: 8
+printers: 8
+
+OctoPrints:
+  - port: 5001
+    apikey: '7175F6DDB0494C1C8693176271DB2125'
+  - port: 5002
+    apikey: '349D39CA8DE047AE8C0E1D7BA19F0EBC'
+  - port: 5003
+    apikey: '809CF0AC5C8C44D99DF8EF42EBEACA11'
+  - port: 5004
+    apikey: '6FE1B1BD7F594EDFABC2451D87E5AF57'
+  - port: 5005
+    apikey: '2E46B8F6CE1D4BF88A9E5D13DD734A61'
+  - port: 5006
+    apikey: '2BC889CA601A4FB181B66BF9541EDD5C'
+  - port: 5007
+    apikey: 'A6844BFD5AFB4FEBA839940EC68D7DB0'
+  - port: 5008
+    apikey: 'E5E5B5416E2E4F2E909263E2B517C3CE'
+
+Printers:
+  - name: phyllis
+    type: printrbot-play
+    color: blue
+    status: ready
+    active: false
+  - name: pippin
+    type: printrbot-play
+    color: blue
+    status: ready
+    active: false
+  - name: poppin
+    type: printrbot-play
+    color: blue
+    status: ready
+    active: false
+  - name: pamella
+    type: printrbot-play
+    color: blue
+    status: ready
+    active: false
+  - name: pablo
+    type: printrbot-play
+    color: blue
+    status: ready
+    active: false
+  - name: pietro
+    type: printrbot-play
+    color: blue
+    status: ready
+    active: false
+
+  - name: sergei
+    type: printrbot-simple
+    color: blue
+    status: ready
+    active: false
+  - name: sakhmet
+    type: printrbot-plus
+    color: blue
+    status: ready
+    active: false
+
+  - name: rolanda
+    type: robo-3d
+    color: blue
+    status: ready
+    active: false
+  - name: reuben
+    type: robo-3d
+    color: blue
+    status: ready
+    active: false
+
+Profiles:
+  - id: printrbot-play
+    name: printrbot play
+    heatedBed: false
+    volume:
+      x: 200
+      y: 200
+      z: 200
+  - id: printrbot-simple
+    name: printrbot simple
+    heatedBed: true
+    volume:
+      x: 200
+      y: 200
+      z: 200
+  - id: printrbot-plus
+    name: printrbot simple
+    heatedBed: true
+    volume:
+      x: 200
+      y: 200
+      z: 200
+  - id: robo-3d
+    name: printrbot simple
+    heatedBed: true
+    volume:
+      x: 200
+      y: 200
+      z: 200

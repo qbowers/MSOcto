@@ -1,0 +1,68 @@
+{% extends 'main.html' %}
+
+{% block style %}
+  <link rel='stylesheet' href='/style/index.css' />
+{% endblock %}
+
+
+
+
+{% block body %}
+
+
+  <div class='head'>
+    <img class='banner' src='/img/head.jpg' />
+
+    <div class='cover'>
+      <div id='title'>
+        <h1>Print@EPS</h1>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class='carousel printer-display-small'>
+    {% for octoprint in OctoPrints %}
+      <!--name, status, color, heat, profile.name, job, server-->
+
+      {% if octoprint.Printer %}
+        <a href='http://{{ octoprint.hostname }}:{{ octoprint.port }}'>
+          <div class='printer-box-small' id='{{ octoprint.Printer.name }}-box'>
+
+            <div class='flex'><p>{{ octoprint.Printer.name }}</p><p>{{ octoprint.Printer.type }}</p></div>
+            <p>{{ octoprint.Printer.status }}</p><div class='progress-bar'></div>
+
+
+            <canvas class='graph' id='heat{{ loop.index }}'></canvas>
+            <canvas class='plane'></canvas>
+
+          </div>
+        </a>
+      {% endif %}
+
+
+    {% endfor %}
+
+    <div class='printer-box-small' id='add-printer'> + </div>
+
+  </div>
+{% endblock %}
+
+
+
+
+
+{% block script %}
+  <script src='/script/lib/three.min.js'></script>
+  <script src='/script/index.js'></script>
+  <script>
+    socket = io();
+    function close() {}
+
+
+
+
+
+  </script>
+{% endblock %}

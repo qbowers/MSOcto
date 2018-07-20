@@ -1,0 +1,18 @@
+{
+  "name": "OctoHandler",
+  "version": "0.0.1",
+  "description": "handles the connection of printers, directs commands to various octoprint servers",
+  "dependencies": {
+    "express": "^4.15.3",
+    "http-proxy": "^1.16.2",
+    "multer": "^1.3.0",
+    "node-sass-middleware": "^0.11.0",
+    "nodemon": "^1.18.2",
+    "npm": "^6.2.0",
+    "nunjucks": "^3.0.1",
+    "serialport": "^5.0.0-beta8",
+    "socket.io": "^2.0.3",
+    "socket.io-client": "^2.0.3",
+    "yamljs": "^0.3.0"
+  }
+}
