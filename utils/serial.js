@@ -18,7 +18,10 @@ var serial = {
       });
     } else { //if not, we should probably find some real ones
       return serialports.list().then((ports) => {
-        ports.forEach((port) => { if (port.comName.includes(serial.portstring)) serial[serial.length++] = port; });
+        ports.forEach((port) => {
+          console.log(port);
+          if (port.comName.includes(serial.portstring)) serial[serial.length++] = port;
+        });
       });
     }
   }
