@@ -47,7 +47,7 @@ serial.refresh(system.testweb())
   //connect each server to a port
   //TODO: leave octoprint servers connected
   for (var i = 0; i < serial.length; i++) {
-    console.log(serial[i]);
+    console.log(serial[i].comName);
 
     //system.OctoPrints[i].disconnect();
     //TODO: error handler: if the thing doesnt connect, try again a few times
