@@ -1,7 +1,7 @@
 const serialports = require('serialport');
 
 var serial = {
-  portstring: '/dev/ttyACM',
+  portstring: '/dev/ttyUSB',
   //portstring: 'COM',
   refresh: (testweb = false) => {
 
