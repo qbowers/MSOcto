@@ -1,5 +1,8 @@
 const serialports = require('serialport');
 
+
+const exec = require('child_process');
+
 var serial = {
   portstring: '/dev/ttyUSB',
   //portstring: 'COM',
