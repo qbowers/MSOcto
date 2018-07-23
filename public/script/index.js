@@ -7,7 +7,7 @@ for (let i = 0; i < graphs.length; i++) {
 
 class Graph {
   constructor(id) {
-    this.e = document.getElementById('heat1');
+    this.e = document.getElementById(id);
     this.ctx = this.e.getContext('2d');
 
     this.w = this.e.width;
@@ -70,9 +70,18 @@ class Graph {
 
 
 
-let g = new Graph('heat1');
+let g = [
+  new Graph('heat1'),
+  new Graph('heat2'),
+  new Graph('heat3'),
+  new Graph('heat4'),
+  new Graph('heat5'),
+  new Graph('heat6'),
+  new Graph('heat7'),
+  new Graph('heat8')
+];
 setInterval(()=> {
-  g.push({
+  for (let i = 0; i < g.length; i++) g[i].push({
     extruder: Math.random() * 200,
     bed: Math.random() * 200
   });
