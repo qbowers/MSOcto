@@ -341,8 +341,8 @@ function newProfile() {
 }
 
 
-const hostname = '10.20.30.109';
-var ready = false,
+const hostname = '10.20.81.187';
+var ready = true,
     testweb = false,
     OctoPrints = [],
     Printers = [],
