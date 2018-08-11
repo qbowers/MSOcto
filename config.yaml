@@ -1,5 +1,5 @@
-OctoPrint: 8
-printers: 8
+OctoPrint: 5
+printers: 5
 
 OctoPrints:
   - port: 5001
@@ -57,61 +57,8 @@ Printers:
     type: Ender
     serial: ah06pazg
 
-  - name: phyllis
-    type: printrbot-play
-    color: blue
-    status: ready
-    active: false
-  - name: pippin
-    type: printrbot-play
-    color: blue
-    status: ready
-    active: false
-  - name: poppin
-    type: printrbot-play
-    color: blue
-    status: ready
-    active: false
-  - name: pamella
-    type: printrbot-play
-    color: blue
-    status: ready
-    active: false
-  - name: pablo
-    type: printrbot-play
-    color: blue
-    status: ready
-    active: false
-  - name: pietro
-    type: printrbot-play
-    color: blue
-    status: ready
-    active: false
-
-  - name: sergei
-    type: printrbot-simple
-    color: blue
-    status: ready
-    active: false
-  - name: sakhmet
-    type: printrbot-plus
-    color: blue
-    status: ready
-    active: false
-
-  - name: rolanda
-    type: robo-3d
-    color: blue
-    status: ready
-    active: false
-  - name: reuben
-    type: robo-3d
-    color: blue
-    status: ready
-    active: false
-
 Profiles:
-  - id: ender
+  - id: Ender
     name: Ender
     heatedBed: false
     volume:

@@ -35,8 +35,9 @@ if (process.argv[2] && process.argv[2] == 'testweb') {
 serial.refresh().then(() => {
   for (let i = 0; i< serial.length; i++) {
     let port = serial[i];
-    exec('udevadm info -a -n /dev/ttyUSB1 | grep '{serial}' | head -n1', (error, stdout, stderr) => {
-      console.log('result: ' + stdout);
+    exec('udevadm info -a -n ' + port + ' | grep \'{serial}\' | head -n1', (error, stdout, stderr) => {
+      let serialno = stdout.substr(16, stdout.length-2); // ATTRS{serial}=="A6008isP"
+      system.OctoPrints[i].attach(system.Printers[serialno.toLowerCase()]);
     });
   }
 });

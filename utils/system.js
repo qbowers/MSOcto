@@ -52,7 +52,11 @@ function OctoPrint(data) {
   this.post = (path, successcode, params, headers = {'Content-Type': 'application/json'}) => { return this.request('POST', path, successcode, params, headers); }
   this.patch = (path, successcode, params, headers = null) => { return this.request('PATCH', path, successcode, params, headers); }
 
-
+  this.attach = (printer) => {
+    printer.OctoPrint = this;
+    this.Printer = printer;
+    this.connect(printer.serial, printer.Profile);
+  }
 
   this.getconnect = () => {
     if (testweb) return new Promise((resolve, reject) => { resolve() });
@@ -272,7 +276,7 @@ function Printer(data) {
   Object.assign(this, data);
 
   //set profile to an actual profile, not just a name
-  for (var i = 0; i < Profiles.length; i++) if (Profiles[i].id == this.type) { this.Profile = Profiles[i]; break; }
+  this.Profile = Profiles[this.type];
 
 
   //progress
@@ -287,11 +291,6 @@ function Printer(data) {
 
   this.moveTool = (data) => {}
 
-  this.attach = (octoprint) => {
-    octoprint.Printer = this;
-    this.OctoPrint = octoprint;
-  }
-
   this.match = (octoprint) => {
     //determine if octoprint is compatible based on serial port and associated profile info
     //or if the printer is already connected
@@ -299,7 +298,7 @@ function Printer(data) {
   }
 
   //constructor adds every instance to an array
-  Printers.push(this);
+  Printers[this.serial] = this;
 }
 
 //classes I might need later
@@ -328,7 +327,7 @@ function Profile(data) {
       }
     }
   }
-  Profiles.push(this);
+  Profiles[this.id] = this;
 }
 
 //functions for adding printers or printer types to the system
@@ -345,8 +344,8 @@ const hostname = '10.20.81.187';
 var ready = true,
     testweb = false,
     OctoPrints = [],
-    Printers = [],
-    Profiles = [],
+    Printers = {},
+    Profiles = {},
     jobs = [];
 
 
