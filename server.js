@@ -36,7 +36,7 @@ if (process.argv[2] && process.argv[2] == 'testweb') {
 
 function forEachKey(object, fn) {
   let keys = Object.keys(object);
-  for (let i = 0; i < keys.length) fn(keys[i]);
+  for (let i = 0; i < keys.length; i++) fn(keys[i]);
 }
 function forEachInObject(object, fn) { forEachKey(objecty, (key) => { fn(object[key]); }); }
 function clear(object) { forEachKey(object, (key) => { delete object[key]; }); }
