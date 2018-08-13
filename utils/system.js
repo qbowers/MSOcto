@@ -345,7 +345,7 @@ var ready = true,
     testweb = false,
     OctoPrints = [],
     Printers = {},
-    connectedPrinters = [],
+    connectedPrinters = {},
     Profiles = {},
     jobs = [];
 

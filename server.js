@@ -34,11 +34,18 @@ if (process.argv[2] && process.argv[2] == 'testweb') {
 
 
 
+function forEachKey(object, fn) {
+  let keys = Object.keys(object);
+  for (let i = 0; i < keys.length) fn(keys[i]);
+}
+function forEachInObject(object, fn) { forEachKey(objecty, (key) => { fn(object[key]); }); }
+function clear(object) { forEachKey(object, (key) => { delete object[key]; }); }
+
+
 function checkConnect() {
   //disconnect printers from ports
-  system.connectedPrinters.length = 0;
-  let keys = Object.keys(system.Printers);
-  for (let i = 0; i < keys.length; i++) system.Printers[keys[i]].port = null;
+  clear(system.connectedPrinters);
+  forEachInObject(system.Printers, (printer) => { printer.port = null; });
 
   //reconnect printers to ports
   serial.refresh().then(() => {
@@ -48,19 +55,26 @@ function checkConnect() {
           printer = system.Printers[serialno.toLowerCase()];
       if (printer) {
         printer.port = port;
-        system.connectedPrinters.push(printer);
+        system.connectedPrinters[serialno] = printer;
       } else console.log('unrecognized serial number: ' + serialno);
     }
 
-    let availablePrinters = system.connectedPrinters.slice(0);
+    let availablePrinters = {};
+    Object.assign(availablePrinters, system.connectedPrinters);
+
     //console.log('connection');
     //system.OctoPrints[j++].attach(printer);
 
     for (let i = 0; i < system.OctoPrints.length; i++) {
       let octo = system.OctoPrints[i];
       octo.getconnect().then((res) => {
-        console.log(octo.port + ": ");
-        console.log(res.body.current.port);
+        let port = res.body.current.port;
+        if (port == null) {
+          let port = Object.keys(availablePrinters)[0];
+          octo.attach(availablePrinters[port]);
+        }
+        delete availablePrinters[port];
+        if (Object.keys(availablePrinters).length = 0) break;
       });
     }
 
