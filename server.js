@@ -32,7 +32,7 @@ if (process.argv[2] && process.argv[2] == 'testweb') {
   system.testweb(true);
 }
 
-serial.refresh().then(() => {
+/*serial.refresh().then(() => {
   let j = 0;
   for (let i = 0; i< serial.length; i++) {
     let port = serial[i];
@@ -45,7 +45,7 @@ serial.refresh().then(() => {
     } else console.log('issue: ' + serialno);
   }
 });
-
+*/
 
 
 setInterval(() => {
