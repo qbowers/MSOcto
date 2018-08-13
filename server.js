@@ -18,10 +18,6 @@ const express = require('express'),
 
 
 
-Array.prototype.clone = () => { return this.slice(0); }
-
-
-
 //load config file
 var config = yaml.load('config.yaml');
 
@@ -56,10 +52,7 @@ function checkConnect() {
       } else console.log('unrecognized serial number: ' + serialno);
     }
 
-
-    console.log(system.connectedPrinters);
-    console.log(system.connectedPrinters.slice(0));
-    let availablePrinters = system.connectedPrinters.clone();
+    let availablePrinters = system.connectedPrinters.slice(0);
     //console.log('connection');
     //system.OctoPrints[j++].attach(printer);
 
