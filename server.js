@@ -18,6 +18,10 @@ const express = require('express'),
 
 
 
+Array.prototype.clone = () => { return this.slice(0); }
+
+
+
 //load config file
 var config = yaml.load('config.yaml');
 
