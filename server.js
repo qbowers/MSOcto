@@ -33,11 +33,15 @@ if (process.argv[2] && process.argv[2] == 'testweb') {
 }
 
 serial.refresh().then(() => {
+  let j = 0;
   for (let i = 0; i< serial.length; i++) {
     let port = serial[i];
     exec('udevadm info -a -n ' + port + ' | grep \'{serial}\' | head -n1', (error, stdout, stderr) => {
-      let serialno = stdout.substr(16, stdout.length-2); // ATTRS{serial}=="A6008isP"
-      system.OctoPrints[i].attach(system.Printers[serialno.toLowerCase()]);
+      let serialno = stdout.substr(16, stdout.length-2), // ATTRS{serial}=="A6008isP"
+          printer = system.Printers[serialno.toLowerCase()];
+      if (printer) {
+        system.OctoPrints[j++].attach(printer);
+      } else console.log('issue: ' + serialno);
     });
   }
 });
