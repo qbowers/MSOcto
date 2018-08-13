@@ -38,7 +38,7 @@ function forEachKey(object, fn) {
   let keys = Object.keys(object);
   for (let i = 0; i < keys.length; i++) fn(keys[i]);
 }
-function forEachInObject(object, fn) { forEachKey(objecty, (key) => { fn(object[key]); }); }
+function forEachInObject(object, fn) { forEachKey(object, (key) => { fn(object[key]); }); }
 function clear(object) { forEachKey(object, (key) => { delete object[key]; }); }
 
 
