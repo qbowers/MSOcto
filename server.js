@@ -36,6 +36,7 @@ serial.refresh().then(() => {
   let j = 0;
   for (let i = 0; i< serial.length; i++) {
     let port = serial[i];
+    console.log(port);
     exec('udevadm info -a -n ' + port + ' | grep \'{serial}\' | head -n1', (error, stdout, stderr) => {
       let serialno = stdout.substr(16, stdout.length-2), // ATTRS{serial}=="A6008isP"
           printer = system.Printers[serialno.toLowerCase()];
