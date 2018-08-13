@@ -44,14 +44,14 @@ serial.refresh().then(() => {
 
 
 
-setInterval(5000, () => {
+setInterval(() => {
   for (let i = 0; i < system.OctoPrints.length; i++) {
     let octo = system.OctoPrints[i];
     octo.getconnect().then((res) => {
       console.log(octo.port + ": " + res);
     });
   }
-});
+}, 5000);
 
 
 
