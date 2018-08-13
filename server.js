@@ -72,12 +72,11 @@ function checkConnect() {
         if (port == null) {
           console.log(octo.port + ' connecting...');
           let port = Object.keys(availablePrinters)[0];
-          octo.attach(availablePrinters[port]);
+          if (port) octo.attach(availablePrinters[port]);
         } else {
           console.log(octo.port + ' already connected');
         }
         delete availablePrinters[port];
-        if (Object.keys(availablePrinters).length = 0) break;
       });
     }
 
