@@ -56,7 +56,7 @@ setInterval(() => {
       console.log(res);
     });
   }
-}, 5000);
+}, 10000);
 
 
 
