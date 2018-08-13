@@ -38,7 +38,7 @@ if (process.argv[2] && process.argv[2] == 'testweb') {
 
 
 
-setInterval(() => {
+function checkConnect() {
   //disconnect printers from ports
   system.connectedPrinters.length = 0;
   let keys = Object.keys(system.Printers);
@@ -55,20 +55,28 @@ setInterval(() => {
         system.connectedPrinters.push(printer);
       } else console.log('unrecognized serial number: ' + serialno);
     }
+
+
+    console.log(system.connectedPrinters);
+    console.log(system.connectedPrinters.slice(0));
+    let availablePrinters = system.connectedPrinters.clone();
+    //console.log('connection');
+    //system.OctoPrints[j++].attach(printer);
+
+    for (let i = 0; i < system.OctoPrints.length; i++) {
+      let octo = system.OctoPrints[i];
+      octo.getconnect().then((res) => {
+        console.log(octo.port + ": ");
+        console.log(res.body.current.port);
+      });
+    }
+
+
+    setTimeout(checkConnect, 10000);
   });
+}
+checkConnect();
 
-  let availablePrinters = system.connectedPrinters.clone();
-  //console.log('connection');
-  //system.OctoPrints[j++].attach(printer);
-
-  for (let i = 0; i < system.OctoPrints.length; i++) {
-    let octo = system.OctoPrints[i];
-    octo.getconnect().then((res) => {
-      console.log(octo.port + ": ");
-      console.log(res.body.current.port);
-    });
-  }
-}, 10000);
 
 
 
