@@ -345,6 +345,7 @@ var ready = true,
     testweb = false,
     OctoPrints = [],
     Printers = {},
+    connectedPrinters = [],
     Profiles = {},
     jobs = [];
 
@@ -356,6 +357,7 @@ module.exports.OctoPrint = OctoPrint;
 module.exports.OctoPrints = OctoPrints;
 module.exports.Printer = Printer;
 module.exports.Printers = Printers;
+module.exports.connectedPrinters = connectedPrinters;
 module.exports.Profile = Profile;
 module.exports.Profiles = Profiles;
 module.exports.ready = function(val = null) {if (val == null) return ready; else ready = val};

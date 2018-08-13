@@ -32,28 +32,36 @@ if (process.argv[2] && process.argv[2] == 'testweb') {
   system.testweb(true);
 }
 
-/*serial.refresh().then(() => {
-  let j = 0;
-  for (let i = 0; i< serial.length; i++) {
-    let port = serial[i];
-
-    let serialno = port.serialNumber;
-        printer = system.Printers[serialno.toLowerCase()];
-    if (printer) {
-      printer.port = port;
-      system.OctoPrints[j++].attach(printer);
-    } else console.log('issue: ' + serialno);
-  }
-});
-*/
 
 
 setInterval(() => {
+  //disconnect printers from ports
+  system.connectedPrinters.length = 0;
+  let keys = Object.keys(system.Printers);
+  for (let i = 0; i < keys.length; i++) system.Printers[keys[i]].port = null;
+
+  //reconnect printers to ports
+  serial.refresh().then(() => {
+    for (let i = 0; i< serial.length; i++) {
+      let port = serial[i],
+          serialno = port.serialNumber;
+          printer = system.Printers[serialno.toLowerCase()];
+      if (printer) {
+        printer.port = port;
+        system.connectedPrinters.push(printer);
+      } else console.log('unrecognized serial number: ' + serialno);
+    }
+  });
+
+  let availablePrinters = system.connectedPrinters.clone();
+  //console.log('connection');
+  //system.OctoPrints[j++].attach(printer);
+
   for (let i = 0; i < system.OctoPrints.length; i++) {
     let octo = system.OctoPrints[i];
     octo.getconnect().then((res) => {
       console.log(octo.port + ": ");
-      console.log(res);
+      console.log(res.body.current.port);
     });
   }
 }, 10000);
