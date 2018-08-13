@@ -52,7 +52,8 @@ setInterval(() => {
   for (let i = 0; i < system.OctoPrints.length; i++) {
     let octo = system.OctoPrints[i];
     octo.getconnect().then((res) => {
-      console.log(octo.port + ": " + res);
+      console.log(octo.port + ": ");
+      console.log(res);
     });
   }
 }, 5000);
