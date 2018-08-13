@@ -1,1 +1,1 @@
-nodemon -e html,scss,js server.js testweb skipsetup
+nodemon -e html,scss,js server.js testweb

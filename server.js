@@ -1,4 +1,5 @@
 const express = require('express'),
+      { exec } = require('child_process'),
       app = express(),
       http = require('http'),
       server = http.Server(app),
@@ -29,33 +30,17 @@ for (var i = 0; i < config.OctoPrints.length; i++) new system.OctoPrint(config.O
 if (process.argv[2] && process.argv[2] == 'testweb') {
   console.log('(testweb mode)');
   system.testweb(true);
-
-  if (process.argv[3] && process.argv[3] == 'skipsetup') {
-    system.ready(true);
-    for (var i = 0; i < system.OctoPrints.length; i++) system.OctoPrints[i].Printer = system.Printers[i];
-  }
 }
 
-
-
-//Assign each server a printer
-serial.refresh(system.testweb())
-.then(() => {
-  //if there are more ports than servers, throw an error
-  //if (serial.length > system.OctoPrints.length) console.log('too many serial devices');
-
-  //connect each server to a port
-  //TODO: leave octoprint servers connected
-  for (var i = 0; i < serial.length; i++) {
-    console.log(serial[i].comName);
-
-    //system.OctoPrints[i].disconnect();
-    //TODO: error handler: if the thing doesnt connect, try again a few times
-    //system.OctoPrints[i].connect( serial[i] );
+serial.refresh().then(() => {
+  for (let i = 0; i< serial.length; i++) {
+    let port = serial[i];
+    exec('udevadm info -a -n ' + port + ' | grep \'{serial}\' | head -n1', (error, stdout, stderr) => {
+      let serialno = stdout.substr(16, stdout.length-2); // ATTRS{serial}=="A6008isP"
+      system.OctoPrints[i].attach(system.Printers[serialno.toLowerCase()]);
+    });
   }
 });
-
-
 
 
 
