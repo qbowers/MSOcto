@@ -70,8 +70,8 @@ function checkConnect() {
       octo.getconnect().then((res) => {
         let port = res.body.current.port;
         if (port == null) {
-          console.log(octo.port + ' connecting...');
           let port = Object.keys(availablePrinters)[0];
+          console.log(octo.port + ' connecting to ' + port);
           if (port) octo.attach(availablePrinters[port]);
         } else {
           console.log(octo.port + ' already connected');
