@@ -84,15 +84,17 @@ function checkConnect() {
         if (responses == system.OctoPrints.length) {
           console.log('responses are in');
           while (availableServers.length > 0 && availablePrinters.length > 0) {
-          let port = Object.keys(availablePrinters)[0],
-              octo = availableServers[0];
+            console.log('a round');
+            let port = Object.keys(availablePrinters)[0],
+                octo = availableServers[0];
 
-          console.log(octo.port + ' connecting to ' + port);
-          octo.attach(availablePrinters[port]);
+            console.log(octo.port + ' connecting to ' + port);
+            octo.attach(availablePrinters[port]);
 
-          delete availablePrinters[port];
-          availableServers.pop();
-        }}
+            delete availablePrinters[port];
+            availableServers.pop();
+          }
+        }
       });
     }
 
