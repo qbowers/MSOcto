@@ -77,11 +77,12 @@ function checkConnect() {
           if (port) {
             console.log(octo.port + ' connecting to ' + port);
             octo.attach(availablePrinters[port]);
-          }
+          } else console.log('out of printers');
         } else {
           console.log(octo.port + ' already connected to ' + port);
         }
         delete availablePrinters[port];
+        console.log(availablePrinters);
       });
     }
 
