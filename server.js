@@ -82,7 +82,7 @@ function checkConnect() {
           console.log(octo.port + ' already connected to ' + port);
         }
         delete availablePrinters[port];
-        console.log(availablePrinters);
+        console.log(Object.keys(availablePrinters));
       });
     }
 
