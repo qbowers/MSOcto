@@ -81,7 +81,9 @@ function checkConnect() {
 
 
         //all the responses are in, all the in use printers are removed
-        if (responses == system.OctoPrints.length) while (availableServers.length > 0 && availablePrinters.length > 0) {
+        if (responses == system.OctoPrints.length) {
+          console.log('responses are in');
+          while (availableServers.length > 0 && availablePrinters.length > 0) {
           let port = Object.keys(availablePrinters)[0],
               octo = availableServers[0];
 
@@ -90,7 +92,7 @@ function checkConnect() {
 
           delete availablePrinters[port];
           availableServers.pop();
-        }
+        }}
       });
     }
 
