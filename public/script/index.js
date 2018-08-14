@@ -66,25 +66,3 @@ class Graph {
     this.render();
   }
 }
-
-
-
-
-let g = [
-  new Graph('heat1'),
-  new Graph('heat2'),
-  new Graph('heat3'),
-  new Graph('heat4'),
-  new Graph('heat5'),
-  new Graph('heat6'),
-  new Graph('heat7'),
-  new Graph('heat8')
-];
-setInterval(()=> {
-  for (let i = 0; i < g.length; i++) g[i].push({
-    extruder: Math.random() * 200,
-    bed: Math.random() * 200
-  });
-},500);
-
-//g.render();

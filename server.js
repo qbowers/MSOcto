@@ -39,6 +39,7 @@ function forEachKey(object, fn) {
   for (let i = 0; i < keys.length; i++) fn(keys[i]);
 }
 function forEachInObject(object, fn) { forEachKey(object, (key) => { fn(object[key]); }); }
+function forEachInArray(array, fn) { for (let i = 0; i<array.lenght; i++) fn(array[i]); }
 function clear(object) { forEachKey(object, (key) => { delete object[key]; }); }
 
 
@@ -46,6 +47,7 @@ function checkConnect() {
   //disconnect printers from ports
   clear(system.connectedPrinters);
   forEachInObject(system.Printers, (printer) => { printer.port = null; });
+  forEachInArray(system.OctoPrints, (octo) => { octo.detach() });
 
   //reconnect printers to ports
   serial.refresh().then(() => {
@@ -74,6 +76,7 @@ function checkConnect() {
         if (port == null) availableServers.push(octo);
         else {
           console.log(octo.port + ' already connected to ' + port);
+          octo.attach(availablePrinters[port]);
           delete availablePrinters[port];
         }
         responses++;
@@ -86,7 +89,7 @@ function checkConnect() {
                 octo = availableServers[0];
 
             console.log(octo.port + ' connecting to ' + port);
-            octo.attach(availablePrinters[port]);
+            octo.connect(availablePrinters[port]);
 
             delete availablePrinters[port];
             availableServers.splice(0,1);

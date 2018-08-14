@@ -55,14 +55,17 @@ function OctoPrint(data) {
   this.attach = (printer) => {
     printer.OctoPrint = this;
     this.Printer = printer;
-    this.connect(printer.port, printer.Profile);
+  }
+  this.detach = () => {
+    this.Printer = null;
   }
 
   this.getconnect = () => {
     if (testweb) return new Promise((resolve, reject) => { resolve() });
     else return this.get('/api/connection', 200);
   }
-  this.connect = (serialport, profile = null, baud = null) => {
+  this.connect = (printer, profile = null, baud = null) => {
+    let serialport = printer.port;
     if (testweb) {  //to test website
       this.serialport = serialport;
       return new Promise((resolve, reject) => { resolve() });
@@ -76,9 +79,10 @@ function OctoPrint(data) {
 
       return this.post('/api/connection', 204, params).then((res) => {
         this.serialport = serialport;
-        //console.log(this.port + ' connected to ' + this.serialport.comName);
+        this.attach(printer);
       });
     }
+
   }
   this.disconnect = () => {
     if (testweb) {  //to test website
