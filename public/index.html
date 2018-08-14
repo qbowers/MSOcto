@@ -13,9 +13,9 @@
   {% for octoprint in OctoPrints %}
       <!--name, status, color, heat, profile.name, job, server-->
     {% if octoprint.Printer %}
-      <button href='http://{{ octoprint.hostname }}:{{ octoprint.port }}'>
+      <a href='http://{{ octoprint.hostname }}:{{ octoprint.port }}'><button>
         {{ octoprint.Printer.name }}
-      </button>
+      </button></a>
     {% endif %}
   {% endfor %}
 {% endblock %}
