@@ -89,7 +89,7 @@ function checkConnect() {
             octo.attach(availablePrinters[port]);
 
             delete availablePrinters[port];
-            availableServers.slice(0,1);
+            availableServers.splice(0,1);
           }
         }
       });
