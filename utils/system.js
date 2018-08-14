@@ -76,7 +76,7 @@ function OctoPrint(data) {
 
       return this.post('/api/connection', 204, params).then((res) => {
         this.serialport = serialport;
-        console.log(this.port + ' connected to ' + this.serialport.comName);
+        //console.log(this.port + ' connected to ' + this.serialport.comName);
       });
     }
   }

@@ -74,14 +74,14 @@ function checkConnect() {
           console.log(octo.port + ' connecting to ' + port);
           if (port) octo.attach(availablePrinters[port]);
         } else {
-          console.log(octo.port + ' already connected');
+          console.log(octo.port + ' already connected to ' + port);
         }
         delete availablePrinters[port];
       });
     }
 
 
-    setTimeout(checkConnect, 10000);
+    setTimeout(checkConnect, 50000);
   });
 }
 checkConnect();
