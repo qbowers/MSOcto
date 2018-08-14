@@ -49,6 +49,7 @@ function checkConnect() {
 
   //reconnect printers to ports
   serial.refresh().then(() => {
+    console.log('\n\n\n');
     for (let i = 0; i< serial.length; i++) {
       let port = serial[i],
           serialno = port.serialNumber;
@@ -60,7 +61,9 @@ function checkConnect() {
     }
 
     let availablePrinters = {};
-    Object.assign(availablePrinters, system.connectedPrinters);
+    forEachInObject(system.connectedPrinters, (printer) => {
+      availablePrinters[printer.port.comName] = printer;
+    });
 
     //console.log('connection');
     //system.OctoPrints[j++].attach(printer);
@@ -71,8 +74,10 @@ function checkConnect() {
         let port = res.body.current.port;
         if (port == null) {
           port = Object.keys(availablePrinters)[0];
-          console.log(octo.port + ' connecting to ' + port);
-          if (port) octo.attach(availablePrinters[port]);
+          if (port) {
+            console.log(octo.port + ' connecting to ' + port);
+            octo.attach(availablePrinters[port]);
+          }
         } else {
           console.log(octo.port + ' already connected to ' + port);
         }
