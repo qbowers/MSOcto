@@ -9,6 +9,7 @@ git clone https://github.com/foosel/OctoPrint.git
 cd OctoPrint
 virtualenv venv
 ./venv/bin/python setup.py install
+cd ../.octoprint
 echo "accessControl:
   enabled: false
 api:
