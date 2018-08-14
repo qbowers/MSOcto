@@ -26,13 +26,13 @@ Printers:
   - name: Ender
     type: Ender
     serial: a107cbgy
-  - name: Emma
+  - name: Edwina
     type: Ender
     serial: a107cc3j
-  - name: Emanuel
+  - name: Esther
     type: Ender
     serial: ah06pb6y
-  - name: Esther
+  - name: Emanuel
     type: Ender
     serial: a107ccd4
   - name: Eggsy
