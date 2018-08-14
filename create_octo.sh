@@ -1,15 +1,14 @@
 #!/bin/bash
  echo "Making octo #$1"
 
-su octoprint$1
-cd ~
+
+cd /home/octoprint$1
 
 
 git clone https://github.com/foosel/OctoPrint.git
 cd OctoPrint
 virtualenv venv
 ./venv/bin/python setup.py install
-<<<<<<< HEAD
 cd ../.octoprint
 echo "accessControl:
   enabled: false
@@ -56,5 +55,3 @@ server:
 " > config.yaml
 
 chmod +rw config.yaml
-=======
->>>>>>> 8127fad8b616a611c618a2636eaff1a9891e1973
