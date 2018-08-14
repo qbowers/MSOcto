@@ -55,7 +55,7 @@ function OctoPrint(data) {
   this.attach = (printer) => {
     printer.OctoPrint = this;
     this.Printer = printer;
-    this.connect(printer.port.comName, printer.Profile);
+    this.connect(printer.port, printer.Profile);
   }
 
   this.getconnect = () => {

@@ -21,21 +21,21 @@ parse_yaml() {
 echo "OctoStart has been run"
 
 cd /home/server/octo1
-./venv/bin/octoprint serve --port=5001  --config config.yaml > log.txt &
+./venv/bin/octoprint serve --port=5001  --config config.yaml >> /home/server/log1.txt &
 cd /home/server/octo2
-./venv/bin/octoprint serve --port=5002  --config config.yaml > log.txt &
+./venv/bin/octoprint serve --port=5002  --config config.yaml >> /home/server/log2.txt &
 cd /home/server/octo3
-./venv/bin/octoprint serve --port=5003  --config config.yaml > log.txt &
+./venv/bin/octoprint serve --port=5003  --config config.yaml >> /home/server/log3.txt &
 cd /home/server/octo4
-./venv/bin/octoprint serve --port=5004  --config config.yaml > log.txt &
+./venv/bin/octoprint serve --port=5004  --config config.yaml >> /home/server/log4.txt &
 cd /home/server/octo5
-./venv/bin/octoprint serve --port=5005  --config config.yaml > log.txt &
+./venv/bin/octoprint serve --port=5005  --config config.yaml >> /home/server/log5.txt &
 cd /home/server/octo6
-./venv/bin/octoprint serve --port=5006  --config config.yaml > log.txt &
+./venv/bin/octoprint serve --port=5006  --config config.yaml >> /home/server/log6.txt &
 cd /home/server/octo7
-./venv/bin/octoprint serve --port=5007  --config config.yaml > log.txt &
+./venv/bin/octoprint serve --port=5007  --config config.yaml >> /home/server/log7.txt &
 cd /home/server/octo8
-./venv/bin/octoprint serve --port=5008  --config config.yaml > log.txt &
+./venv/bin/octoprint serve --port=5008  --config config.yaml >> /home/server/log8.txt &
 
 #cd /home/server/MSOcto
 #sudo node server.js 2>> log.txt
