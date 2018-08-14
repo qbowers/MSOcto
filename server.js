@@ -66,7 +66,7 @@ function checkConnect() {
 
     //console.log('connection');
     //system.OctoPrints[j++].attach(printer);
-
+    let responses = 0;
     for (let i = 0; i < system.OctoPrints.length; i++) {
       let octo = system.OctoPrints[i];
       octo.getconnect().then((res) => {
@@ -76,6 +76,7 @@ function checkConnect() {
           console.log(octo.port + ' already connected to ' + port);
           delete availablePrinters[port];
         }
+        responses++;
         console.log(Object.keys(availablePrinters));
 
 
