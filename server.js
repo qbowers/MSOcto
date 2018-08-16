@@ -102,7 +102,10 @@ function checkConnect() {
     setTimeout(checkConnect, 50000);
   });
 }
-checkConnect();
+if (testweb) {
+  let i = 0;
+  forEachInArray(system.OctoPrints, (octo) => { octo.attach(system.Printers[Object.keys(system.Printers)[i++]]); });
+} else checkConnect();
 
 
 
